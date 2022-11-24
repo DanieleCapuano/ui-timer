@@ -12,9 +12,9 @@
 	else if(typeof define === 'function' && define.amd)
 		define([], factory);
 	else if(typeof exports === 'object')
-		exports["ui-loader"] = factory();
+		exports["ui-timer"] = factory();
 	else
-		root["ui-loader"] = factory();
+		root["ui-timer"] = factory();
 })(self, () => {
 return /******/ (() => { // webpackBootstrap
 /******/ 	"use strict";
@@ -26,7 +26,7 @@ return /******/ (() => { // webpackBootstrap
   \**********************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"Timer\": () => (/* binding */ Timer),\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\nfunction Timer(callback, timeInterval, debug) {\n  //thanks to https://www.youtube.com/watch?v=x8PBWobv6NY\n\n  this.timeInterval = timeInterval;\n  this.start = () => {\n    this.expected = Date.now() + this.timeInterval;\n    this.timeout = setTimeout(this.round, this.timeInterval);\n    debug && console.log('Started');\n  };\n  this.stop = () => {\n    clearTimeout(this.timeout);\n    debug && console.log(\"Stopped\");\n  };\n  this.round = () => {\n    let drift = Date.now() - this.expected;\n    if (drift > this.timeInterval) {\n      console.warn(\"High drift found\", drift);\n    }\n    callback();\n    this.expected += this.timeInterval;\n    if (debug) {\n      console.log(\"Drift = \" + drift);\n      console.log(this.timeInterval - drift);\n    }\n    this.timeout = setTimeout(this.round, this.timeInterval - drift);\n  };\n}\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({\n  Timer\n});\n\n//# sourceURL=webpack://ui-loader/./src/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"Timer\": () => (/* binding */ Timer),\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\nfunction Timer(callback, timeInterval, debug) {\n  //thanks to https://www.youtube.com/watch?v=x8PBWobv6NY\n\n  this.timeInterval = timeInterval;\n  this.start = () => {\n    this.expected = Date.now() + this.timeInterval;\n    this.timeout = setTimeout(this.round, this.timeInterval);\n    debug && console.log('Started');\n  };\n  this.stop = () => {\n    clearTimeout(this.timeout);\n    debug && console.log(\"Stopped\");\n  };\n  this.round = () => {\n    let drift = Date.now() - this.expected;\n    if (drift > this.timeInterval) {\n      console.warn(\"High drift found\", drift);\n    }\n    callback();\n    this.expected += this.timeInterval;\n    if (debug) {\n      console.log(\"Drift = \" + drift);\n      console.log(this.timeInterval - drift);\n    }\n    this.timeout = setTimeout(this.round, this.timeInterval - drift);\n  };\n}\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({\n  Timer\n});\n\n//# sourceURL=webpack://ui-timer/./src/index.js?");
 
 /***/ })
 

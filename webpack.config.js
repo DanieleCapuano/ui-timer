@@ -8,8 +8,8 @@ const config = [{
   entry: "./src/index.js",
   output: {
     path: path.resolve(__dirname, "dist"),
-    filename: "ui-loader.js",
-    library: "ui-loader",
+    filename: "ui-timer.js",
+    library: "ui-timer",
     libraryTarget: 'umd'
   },
   plugins: [
