@@ -1,6 +1,7 @@
 function Timer(callback, timeInterval, debug) {
     //thanks to https://www.youtube.com/watch?v=x8PBWobv6NY
 
+    this.stopped = false;
     this.timeInterval = timeInterval;
     this.start = () => {
         this.expected = Date.now() + this.timeInterval;
@@ -10,6 +11,7 @@ function Timer(callback, timeInterval, debug) {
 
     this.stop = () => {
         clearTimeout(this.timeout);
+        this.stopped = true;
         debug && console.log("Stopped");
     };
 
@@ -25,7 +27,9 @@ function Timer(callback, timeInterval, debug) {
             console.log("Drift = " + drift);
             console.log(this.timeInterval - drift);
         }
-        this.timeout = setTimeout(this.round, this.timeInterval - drift);
+        if (!this.stopped) {
+            this.timeout = setTimeout(this.round, this.timeInterval - drift);
+        }
     };
 }
 
